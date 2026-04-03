@@ -4,7 +4,8 @@ A landing page for a digital marketing agency built with HTML, Tailwind CSS, and
 
 ## Screenshot
 
-![Screenshot](screenshot.png)
+<img width="2559" height="1599" alt="image" src="https://github.com/user-attachments/assets/72391b4f-f605-4549-9d55-7413a3d64220" />
+
 
 ## Features
 
@@ -32,7 +33,7 @@ Open `http://localhost:3000` in your browser.
 
 ## Live Demo
 
-Live Demo: https://your-site.vercel.app
+Live Demo: https://prodesk-it-internship.vercel.app/
 
 ## Lighthouse Report
 
@@ -40,12 +41,16 @@ Live Demo: https://your-site.vercel.app
 - Performance: 100  
 - Accessibility: 100  
 
-![Desktop Lighthouse](lighthouse-desktop.png)
+<img width="2518" height="1499" alt="image" src="https://github.com/user-attachments/assets/dbf7ab94-2c23-487c-978f-8ebb67f2bab4" />
+
+
 
 ---
 
 ### Mobile
-- Performance: 100  
+- Performance: 99  
 - Accessibility: 100  
 
-![Mobile Lighthouse](lighthouse-mobile.png)
+<img width="2559" height="1498" alt="image" src="https://github.com/user-attachments/assets/f9f5fb2d-dfde-433c-b3e4-7c33cdc436a5" />
+
+
