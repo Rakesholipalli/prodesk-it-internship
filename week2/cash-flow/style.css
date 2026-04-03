@@ -1,0 +1,15 @@
+/* Tailwind handles all styling via index.html classes.
+   This file only contains overrides needed for dynamic JS states. */
+
+/* Expense list items injected by JS */
+.expense-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid #334155;
+}
+
+.expense-item:last-child {
+  border-bottom: none;
+}
