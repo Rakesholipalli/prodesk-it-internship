@@ -1,8 +1,6 @@
-// ─── State ───────────────────────────────────────────────────────────────────
-// All monetary values stored in INR (base currency) — never overwritten on conversion
 var state = {
   salaryINR: 0,
-  expensesINR: [],    // [{ id, name, category, date, amountINR }]
+  expensesINR: [],    
   currency: 'INR',
 };
 
@@ -11,12 +9,12 @@ var categoryChart = null;
 var isConverting  = false;
 var editingId     = null;
 
-// Live rates cache: rates[currency] = how many units per 1 INR
+
 var ratesCache = { INR: 1 };
 
 var CURRENCY_SYMBOLS = { INR: '\u20B9', USD: '\u0024', EUR: '\u20AC', GBP: '\u00A3' };
 
-// ─── DOM Refs ─────────────────────────────────────────────────────────────────
+
 var salaryInput     = document.getElementById('salaryInput');
 var setSalaryBtn    = document.getElementById('setSalaryBtn');
 var currencySelect  = document.getElementById('currencySelect');
@@ -41,7 +39,7 @@ var editDate        = document.getElementById('editDate');
 var saveEditBtn     = document.getElementById('saveEditBtn');
 var cancelEditBtn   = document.getElementById('cancelEditBtn');
 
-// ─── Persistence ─────────────────────────────────────────────────────────────
+
 function saveState() {
   localStorage.setItem('cashflow_state', JSON.stringify(state));
 }
@@ -51,7 +49,7 @@ function loadState() {
     var saved = localStorage.getItem('cashflow_state');
     if (saved) {
       var parsed = JSON.parse(saved);
-      // Migrate old format (salary/expenses) to new (salaryINR/expensesINR)
+     
       if (parsed.salary !== undefined || parsed.expenses !== undefined) {
         state.salaryINR   = parsed.salary || 0;
         state.expensesINR = (parsed.expenses || []).map(function(e) {
@@ -71,8 +69,7 @@ function loadState() {
   }
 }
 
-// ─── Conversion ───────────────────────────────────────────────────────────────
-// Always convert FROM INR base — never from a previously converted value
+
 function fromINR(amountINR) {
   var rate = ratesCache[state.currency] || 1;
   return amountINR * rate;
@@ -87,13 +84,12 @@ async function fetchRates() {
     ratesCache.EUR = data.rates.EUR;
     ratesCache.GBP = data.rates.GBP;
   } catch (e) {
-    // fallback static rates if API fails
+
     ratesCache = { INR: 1, USD: 0.01056, EUR: 0.0092, GBP: 0.0079 };
     console.warn('Using fallback rates:', ratesCache);
   }
 }
 
-// ─── Format ───────────────────────────────────────────────────────────────────
 function fmt(amountINR) {
   var sym = CURRENCY_SYMBOLS[state.currency] || state.currency;
   return sym + Number(fromINR(amountINR)).toLocaleString('en-IN', {
@@ -102,7 +98,6 @@ function fmt(amountINR) {
   });
 }
 
-// Expense display: -₹10,000.00
 function fmtExpense(amountINR) {
   var sym = CURRENCY_SYMBOLS[state.currency] || state.currency;
   return '-' + sym + Number(fromINR(amountINR)).toLocaleString('en-IN', {
@@ -111,7 +106,7 @@ function fmtExpense(amountINR) {
   });
 }
 
-// Format date: "2026-03-31" → "31 Mar 2026"
+
 function fmtDate(d) {
   if (!d) return 'Not set';
   var parts = d.split('-');
@@ -120,7 +115,7 @@ function fmtDate(d) {
   return parts[2] + ' ' + months[parseInt(parts[1], 10) - 1] + ' ' + parts[0];
 }
 function render() {
-  // Safety: ensure arrays are always valid
+  
   if (!Array.isArray(state.expensesINR)) state.expensesINR = [];
 
   var totalINR   = state.expensesINR.reduce(function(s, e) { return s + e.amountINR; }, 0);
@@ -141,7 +136,7 @@ function render() {
   if (window.lucide) lucide.createIcons();
 }
 
-// Category badge colors
+
 var CAT_COLORS = {
   Food:          'bg-orange-900 text-orange-300',
   Rent:          'bg-blue-900 text-blue-300',
@@ -202,7 +197,7 @@ function renderChart(totalINR, balanceINR) {
     });
   }
 
-  // Category chart
+  
   var catCtx = document.getElementById('categoryChart').getContext('2d');
   var catMap = {};
   state.expensesINR.forEach(function(e) {
@@ -229,7 +224,7 @@ function renderChart(totalINR, balanceINR) {
   }
 }
 
-// ─── Set Salary ───────────────────────────────────────────────────────────────
+
 setSalaryBtn.addEventListener('click', function() {
   var raw        = salaryInput.value.trim();
   var val        = Number(raw);
@@ -254,13 +249,13 @@ salaryInput.addEventListener('keydown', function(e) {
   if (e.key === 'Enter') setSalaryBtn.click();
 });
 
-// ─── Add Expense ──────────────────────────────────────────────────────────────
+
 addExpenseBtn.addEventListener('click', function() {
   var name   = expenseName.value.trim();
   var amount = Number(expenseAmount.value);
   var cat    = expenseCategory.value;
 
-  // Reset borders
+  
   expenseName.style.borderColor     = '';
   expenseCategory.style.borderColor = '';
   expenseAmount.style.borderColor   = '';
@@ -301,7 +296,7 @@ expenseAmount.addEventListener('keydown', function(e) {
   if (e.key === 'Enter') addExpenseBtn.click();
 });
 
-// ─── Delete Expense ───────────────────────────────────────────────────────────
+
 expenseList.addEventListener('click', function(e) {
   var btn = e.target.closest('.delete-btn');
   if (btn) {
@@ -332,7 +327,7 @@ saveEditBtn.addEventListener('click', function() {
   var date   = editDate.value;
   var editError = document.getElementById('editError');
 
-  // Reset field borders
+  
   editName.style.borderColor     = '';
   editAmount.style.borderColor   = '';
   editDate.style.borderColor     = '';
@@ -369,7 +364,7 @@ cancelEditBtn.addEventListener('click', function() {
   editModal.classList.add('hidden');
 });
 
-// ─── Clear All ────────────────────────────────────────────────────────────────
+
 clearAllBtn.addEventListener('click', function() {
   if (!confirm('Clear all data?')) return;
   state = { salaryINR: 0, expensesINR: [], currency: state.currency };
@@ -378,21 +373,21 @@ clearAllBtn.addEventListener('click', function() {
   render();
 });
 
-// ─── Currency Switch — just change display, never touch base values ───────────
+
 currencySelect.addEventListener('change', async function() {
   if (isConverting) return;
   isConverting = true;
   currencySelect.disabled = true;
 
-  await fetchRates(); // ensure rates are loaded
+  await fetchRates(); 
   state.currency = currencySelect.value;
 
   currencySelect.disabled = false;
   isConverting = false;
-  render(); // re-render using fromINR() with new currency
+  render(); 
 });
 
-// ─── PDF Export — direct download via jsPDF (no dialog, no new tab) ──────────
+
 downloadPdfBtn.addEventListener('click', function() {
   if (!Array.isArray(state.expensesINR)) state.expensesINR = [];
 
@@ -403,13 +398,12 @@ downloadPdfBtn.addEventListener('click', function() {
   var balanceINR = state.salaryINR - totalINR;
   var now        = new Date().toLocaleDateString('en-GB');
   var isAlert    = state.salaryINR > 0 && balanceINR < state.salaryINR * 0.1;
-  var pageW      = doc.internal.pageSize.getWidth();  // 210mm
-  var pageH      = doc.internal.pageSize.getHeight(); // 297mm
-  var lx         = 15; // left x
-  var rx         = pageW - 15; // right x
+  var pageW      = doc.internal.pageSize.getWidth();  
+  var pageH      = doc.internal.pageSize.getHeight(); 
+  var lx         = 15; 
+  var rx         = pageW - 15; 
 
-  // Currency label only (no symbol) — helvetica can't render ₹/€/£
-  // Web UI shows real symbols; PDF shows e.g. "INR 50,000.00"
+  
   function fP(n) {
     return cur + ' ' + Number(fromINR(n)).toLocaleString('en-IN', {
       minimumFractionDigits: 2, maximumFractionDigits: 2
@@ -421,7 +415,6 @@ downloadPdfBtn.addEventListener('click', function() {
     });
   }
 
-  // ── Header block ────────────────────────────────────────────────────────────
   doc.setFillColor(15, 23, 42);
   doc.rect(0, 0, pageW, 28, 'F');
   doc.setFont('helvetica', 'bold');
@@ -434,7 +427,7 @@ downloadPdfBtn.addEventListener('click', function() {
   doc.text('Generated on: ' + now, lx, 21);
   doc.text('Currency: ' + cur, rx, 21, { align: 'right' });
 
-  // ── Summary ─────────────────────────────────────────────────────────────────
+  
   var y = 38;
   doc.setFont('helvetica', 'bold');
   doc.setFontSize(9);
@@ -472,7 +465,7 @@ downloadPdfBtn.addEventListener('click', function() {
     y += 7;
   }
 
-  // ── Expenses Breakdown ───────────────────────────────────────────────────────
+
   y += 4;
   doc.setFont('helvetica', 'bold');
   doc.setFontSize(9);
@@ -507,7 +500,7 @@ downloadPdfBtn.addEventListener('click', function() {
     });
     y = doc.lastAutoTable.finalY + 4;
 
-    // Totals row
+  
     doc.setDrawColor(15, 23, 42);
     doc.setLineWidth(0.5);
     doc.line(lx, y, rx, y);
@@ -521,7 +514,7 @@ downloadPdfBtn.addEventListener('click', function() {
     y += 8;
   }
 
-  // ── Footer ───────────────────────────────────────────────────────────────────
+  
   y += 4;
   doc.setDrawColor(203, 213, 225);
   doc.setLineWidth(0.3);
@@ -535,7 +528,6 @@ downloadPdfBtn.addEventListener('click', function() {
   doc.save('cashflow-report.pdf');
 });
 
-// ─── Init ─────────────────────────────────────────────────────────────────────
 loadState();
 fetchRates().then(function() {
   render();
