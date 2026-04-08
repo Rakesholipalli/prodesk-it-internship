@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dev Detective</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+  <div class="container">
+    <h1 class="logo"><i data-lucide="search"></i> Dev Detective</h1>
+
+    <!-- Tab Toggle -->
+    <div class="tabs">
+      <button class="tab active" data-tab="search">Single Search</button>
+      <button class="tab" data-tab="battle"><i data-lucide="swords"></i> Battle Mode</button>
+    </div>
+
+    <!-- Single Search -->
+    <div id="search" class="tab-content active">
+      <form class="search-form" id="searchForm">
+        <div class="input-wrap">
+          <input type="text" id="searchInput" placeholder="Enter GitHub username..." autocomplete="off" required />
+          <span class="field-error" id="searchError"></span>
+        </div>
+        <button type="submit">Search</button>
+      </form>
+      <div id="status"></div>
+      <div id="profileCard"></div>
+      <div id="repoList"></div>
+    </div>
+
+    <!-- Battle Mode -->
+    <div id="battle" class="tab-content">
+      <form class="search-form battle-form" id="battleForm">
+        <div class="input-wrap">
+          <input type="text" id="user1Input" placeholder="Username 1..." autocomplete="off" required />
+          <span class="field-error" id="error1"></span>
+        </div>
+        <div class="input-wrap">
+          <input type="text" id="user2Input" placeholder="Username 2..." autocomplete="off" required />
+          <span class="field-error" id="error2"></span>
+        </div>
+        <button type="submit" id="battleBtn" disabled>Battle!</button>
+      </form>
+      <div id="battleStatus"></div>
+      <div id="battleArena"></div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
