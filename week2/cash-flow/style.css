@@ -1,7 +1,3 @@
-/* Tailwind handles all styling via index.html classes.
-   This file only contains overrides needed for dynamic JS states. */
-
-/* Expense list items injected by JS */
 .expense-item {
   display: flex;
   justify-content: space-between;

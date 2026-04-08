@@ -36,4 +36,4 @@ Or just double-click `index.html` to open directly in your browser.
 
 ## Live Demo
 
-Live Demo: [https://prodesk-it-internship.vercel.app/](https://prodesk-it-internship.vercel.app/)
+Live Demo: https://prodesk-it-internship-gphq.vercel.app/

@@ -8,7 +8,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <!-- Lucide Icons -->
+  
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
   <style>
     body { background-color: #0f172a; }
@@ -23,7 +23,7 @@
       <i data-lucide="wallet" class="inline-block w-8 h-8 mr-2 align-middle"></i>Cash-Flow Tracker
     </h1>
 
-    <!-- Salary Card -->
+    
     <div class="bg-slate-800 rounded-xl p-5">
       <p class="text-xs text-slate-400 uppercase tracking-widest mb-3 flex items-center gap-1.5">
         <i data-lucide="banknote" class="w-3.5 h-3.5"></i> Set Salary
@@ -46,7 +46,7 @@
       <p id="salaryError" class="hidden text-red-400 text-xs mt-2">Please enter a valid salary amount.</p>
     </div>
 
-    <!-- Summary Card -->
+    
     <div class="bg-slate-800 rounded-xl p-5 flex flex-wrap gap-4 justify-between">
       <div class="flex flex-col items-center flex-1 min-w-[120px]">
         <span class="text-xs text-slate-400 uppercase tracking-widest flex items-center gap-1">
@@ -68,13 +68,13 @@
       </div>
     </div>
 
-    <!-- Budget Alert -->
+    
     <div id="budgetAlert" class="hidden bg-red-950 border border-red-500 text-red-300 font-semibold px-4 py-3 rounded-xl flex items-center gap-2">
       <i data-lucide="triangle-alert" class="w-4 h-4 shrink-0"></i>
       Warning: Your balance is below 10% of your salary!
     </div>
 
-    <!-- Add Expense Card -->
+    
     <div class="bg-slate-800 rounded-xl p-5">
       <p class="text-xs text-slate-400 uppercase tracking-widest mb-3 flex items-center gap-1.5">
         <i data-lucide="receipt" class="w-3.5 h-3.5"></i> Add Expense
@@ -108,7 +108,7 @@
       </p>
     </div>
 
-    <!-- Expense List Card -->
+    
     <div class="bg-slate-800 rounded-xl p-5">
       <p class="text-xs text-slate-400 uppercase tracking-widest mb-3 flex items-center gap-1.5">
         <i data-lucide="list" class="w-3.5 h-3.5"></i> Expenses
@@ -118,7 +118,7 @@
       </ul>
     </div>
 
-    <!-- Charts Card -->
+    
     <div class="bg-slate-800 rounded-xl p-5">
       <p class="text-xs text-slate-400 uppercase tracking-widest mb-4 flex items-center gap-1.5">
         <i data-lucide="pie-chart" class="w-3.5 h-3.5"></i> Breakdown
@@ -135,7 +135,7 @@
       </div>
     </div>
 
-    <!-- Action Buttons -->
+    
     <div class="flex gap-3 justify-end pb-8">
       <button id="downloadPdfBtn"
         class="bg-violet-600 hover:bg-violet-500 text-white font-bold px-5 py-2.5 rounded-lg text-sm transition-colors flex items-center gap-1.5">
@@ -149,7 +149,7 @@
 
   </div>
 
-  <!-- Edit Modal -->
+  
   <div id="editModal" class="hidden fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50">
     <div class="bg-slate-800 rounded-xl p-6 w-full max-w-sm mx-4 space-y-3">
       <p class="text-sm font-bold text-slate-200 mb-1 flex items-center gap-1.5">
