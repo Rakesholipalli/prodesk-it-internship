@@ -49,7 +49,7 @@ Or just double-click `index.html` to open directly in your browser.
 
 ## Live Demo
 
-Live Demo: [Add your Vercel link here]
+Live Demo: https://prodesk-it-internship-skun.vercel.app/
 
 ## API Rate Limits
 
