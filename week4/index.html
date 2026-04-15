@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Cover Letter Generator</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+</head>
+<body>
+  <div class="bg-blur"></div>
+
+  <main class="container">
+    <header>
+      <div class="logo"><i data-lucide="file-pen-line"></i> CoverCraft AI</div>
+      <p class="tagline">Generate a personalized cover letter in seconds</p>
+    </header>
+
+    <div class="card form-card">
+      <form id="coverForm">
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="name">Your Full Name</label>
+            <input type="text" id="name" placeholder="Jane Doe" required />
+          </div>
+          <div class="form-group">
+            <label for="role">Job Role</label>
+            <input type="text" id="role" placeholder="Frontend Engineer" required />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="company">Company Name</label>
+          <input type="text" id="company" placeholder="Google" required />
+        </div>
+
+        <div class="form-group">
+          <label for="jobDescription">Job Description</label>
+          <textarea id="jobDescription" rows="5" placeholder="Paste the job description here..." required></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="skills">Key Skills <span class="optional">(optional if uploading resume)</span></label>
+          <input type="text" id="skills" placeholder="React, TypeScript, Node.js, REST APIs" />
+        </div>
+
+        <div class="form-group">
+          <label>Upload Resume <span class="optional">(PDF — for personalized output)</span></label>
+          <div class="upload-zone" id="uploadZone">
+            <input type="file" id="resumeFile" accept=".pdf" hidden />
+            <div class="upload-content" id="uploadContent">
+              <span class="upload-icon"><i data-lucide="file-up"></i></span>
+              <span id="uploadLabel">Drop your PDF here or <u>browse</u></span>
+            </div>
+          </div>
+        </div>
+
+        <button type="submit" class="btn-generate" id="submitBtn">
+          <span id="btnText">Generate Cover Letter</span>
+          <span id="btnLoader" class="loader hidden"></span>
+        </button>
+      </form>
+    </div>
+
+    <div class="card output-card hidden" id="outputCard">
+      <div class="output-header">
+        <h2>Your Cover Letter</h2>
+        <button class="btn-copy" id="copyBtn" title="Copy to clipboard">
+          <span id="copyIcon"><i data-lucide="clipboard"></i></span> Copy
+        </button>
+      </div>
+      <div class="letter-box" id="letterBox"></div>
+    </div>
+
+    <div class="error-banner hidden" id="errorBanner"></div>
+  </main>
+
+  <script type="module" src="main.js"></script>
+  <script>lucide.createIcons();</script>
+</body>
+</html>
