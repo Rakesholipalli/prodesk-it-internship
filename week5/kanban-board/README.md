@@ -55,4 +55,4 @@ src/
 
 ## Live Demo
 
-Live Demo: https://prodesk-it-internship-gphq.vercel.app/
+Live Demo: https://prodesk-it-internship-ipi2.vercel.app/
