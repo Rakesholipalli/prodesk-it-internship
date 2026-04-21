@@ -2,7 +2,7 @@
 
 An AI-powered cover letter generator built with HTML, CSS, and vanilla JavaScript using the Google Gemini API. Supports PDF resume upload with client-side text extraction, dynamic prompt engineering, and a clean dark UI.
 
-Live Demo: https://your-vercel-url.vercel.app
+Live Demo: https://prodesk-it-internship-gojd-5lojvxd0o.vercel.app/
 
 ## Features
 
