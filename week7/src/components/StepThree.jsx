@@ -2,7 +2,6 @@ import React from 'react';
 import './StepForm.css';
 
 const StepThree = ({ formData }) => {
-  // Format date to be more user-friendly
   const formatDate = (dateString) => {
     if (!dateString) return '';
     const date = new Date(dateString);

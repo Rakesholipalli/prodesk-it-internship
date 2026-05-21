@@ -1,8 +1,6 @@
 import { z } from 'zod';
 
-// Enterprise-grade validation schema using Zod
 export const registrationSchema = z.object({
-  // Step 1: Personal Info
   firstName: z.string()
     .min(1, 'First name is required')
     .min(2, 'First name must be at least 2 characters'),
@@ -20,7 +18,6 @@ export const registrationSchema = z.object({
       return age >= 18;
     }, 'You must be at least 18 years old'),
   
-  // Step 2: Account Details
   email: z.string()
     .min(1, 'Email is required')
     .regex(/^[^\s@]+@[^\s@]+\.[^\s@]+$/, 'Invalid email format'),
