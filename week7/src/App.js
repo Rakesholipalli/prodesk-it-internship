@@ -102,15 +102,6 @@ function App() {
     setIsSubmitted(true);
   };
 
-  // Reset form and start over
-  const handleReset = () => {
-    reset();
-    setCurrentStep(1);
-    setIsSubmitted(false);
-    setShowLogin(false);
-    setShowRegister(true);
-  };
-
   // Handle login
   const handleLogin = (user) => {
     setLoggedInUser(user);
@@ -120,13 +111,11 @@ function App() {
   const handleLogout = () => {
     setLoggedInUser(null);
     setShowLogin(true);
-    setShowRegister(false);
   };
 
   // Switch to registration
   const handleSwitchToRegister = () => {
     setShowLogin(false);
-    setShowRegister(true);
     reset();
     setCurrentStep(1);
   };
@@ -135,7 +124,6 @@ function App() {
   const handleGoToLogin = () => {
     setIsSubmitted(false);
     setShowLogin(true);
-    setShowRegister(false);
     reset();
   };
 
@@ -242,10 +230,7 @@ function App() {
           <button 
             type="button" 
             className="link-button-footer"
-            onClick={() => {
-              setShowLogin(true);
-              setShowRegister(false);
-            }}
+            onClick={() => setShowLogin(true)}
           >
             Already have an account? Sign in
           </button>
