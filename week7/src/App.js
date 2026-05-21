@@ -15,7 +15,6 @@ function App() {
   const [currentStep, setCurrentStep] = useState(1);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
-  const [showRegister, setShowRegister] = useState(true);
   const [loggedInUser, setLoggedInUser] = useState(null);
 
   // React Hook Form initialization with Zod resolver
