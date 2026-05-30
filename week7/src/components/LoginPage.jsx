@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { Eye, EyeOff, LogIn } from 'lucide-react';
+import { Eye, EyeOff } from 'lucide-react';
 import './StepForm.css';
 import './LoginPage.css';
 

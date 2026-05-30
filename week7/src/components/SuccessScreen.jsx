@@ -3,7 +3,6 @@ import { CheckCircle } from 'lucide-react';
 import './SuccessScreen.css';
 
 const SuccessScreen = ({ formData, onGoToLogin }) => {
-  // Format date to be more user-friendly
   const formatDate = (dateString) => {
     if (!dateString) return '';
     const date = new Date(dateString);

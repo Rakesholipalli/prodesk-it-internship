@@ -15,10 +15,8 @@ function App() {
   const [currentStep, setCurrentStep] = useState(1);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
-  const [showRegister, setShowRegister] = useState(true);
   const [loggedInUser, setLoggedInUser] = useState(null);
 
-  // React Hook Form initialization with Zod resolver
   const {
     register,
     handleSubmit,
@@ -28,7 +26,7 @@ function App() {
     formState: { errors }
   } = useForm({
     resolver: zodResolver(registrationSchema),
-    mode: 'onChange', // Real-time validation
+    mode: 'onChange',
     defaultValues: {
       firstName: '',
       lastName: '',
@@ -39,9 +37,8 @@ function App() {
     }
   });
 
-  const formData = watch(); // Watch all form values for state persistence
+  const formData = watch();
 
-  // Step-specific validation before navigation
   const validateCurrentStep = async () => {
     let fieldsToValidate = [];
     
@@ -55,7 +52,6 @@ function App() {
     return result;
   };
 
-  // Navigation handlers
   const handleNext = async () => {
     const isStepValid = await validateCurrentStep();
     
@@ -68,9 +64,7 @@ function App() {
     setCurrentStep(currentStep - 1);
   };
 
-  // Final submission handler
   const onSubmit = (data) => {
-    // Check if user already exists
     const users = JSON.parse(localStorage.getItem('registeredUsers') || '[]');
     const existingUser = users.find(u => u.email === data.email);
     
@@ -82,7 +76,6 @@ function App() {
       return;
     }
     
-    // Save new user to localStorage
     const newUser = {
       firstName: data.firstName,
       lastName: data.lastName,
@@ -99,48 +92,30 @@ function App() {
     console.log(data);
     console.log('====================================');
     
-    // Trigger success state
     setIsSubmitted(true);
   };
 
-  // Reset form and start over
-  const handleReset = () => {
-    reset();
-    setCurrentStep(1);
-    setIsSubmitted(false);
-    setShowLogin(false);
-    setShowRegister(true);
-  };
-
-  // Handle login
   const handleLogin = (user) => {
     setLoggedInUser(user);
   };
 
-  // Handle logout
   const handleLogout = () => {
     setLoggedInUser(null);
     setShowLogin(true);
-    setShowRegister(false);
   };
 
-  // Switch to registration
   const handleSwitchToRegister = () => {
     setShowLogin(false);
-    setShowRegister(true);
     reset();
     setCurrentStep(1);
   };
 
-  // Switch to login from success screen
   const handleGoToLogin = () => {
     setIsSubmitted(false);
     setShowLogin(true);
-    setShowRegister(false);
     reset();
   };
 
-  // Check if current step fields are valid for conditional button disabling
   const isStepValid = () => {
     if (currentStep === 1) {
       return formData.firstName && 
@@ -160,12 +135,10 @@ function App() {
     return true;
   };
 
-  // Show welcome back screen if user is logged in (Dashboard)
   if (loggedInUser) {
     return <WelcomeBack user={loggedInUser} onLogout={handleLogout} />;
   }
 
-  // Show login page
   if (showLogin) {
     return (
       <LoginPage 
@@ -175,7 +148,6 @@ function App() {
     );
   }
 
-  // Render success screen after registration submission
   if (isSubmitted) {
     return <SuccessScreen formData={formData} onGoToLogin={handleGoToLogin} />;
   }
@@ -191,7 +163,6 @@ function App() {
         <ProgressBar currentStep={currentStep} totalSteps={3} />
 
         <form onSubmit={handleSubmit(onSubmit)} className="wizard-form">
-          {/* Conditional rendering based on current step */}
           {currentStep === 1 && (
             <StepOne register={register} errors={errors} />
           )}
@@ -204,7 +175,6 @@ function App() {
             <StepThree formData={formData} />
           )}
 
-          {/* Navigation buttons */}
           <div className="button-group">
             {currentStep > 1 && (
               <button
@@ -243,10 +213,7 @@ function App() {
           <button 
             type="button" 
             className="link-button-footer"
-            onClick={() => {
-              setShowLogin(true);
-              setShowRegister(false);
-            }}
+            onClick={() => setShowLogin(true)}
           >
             Already have an account? Sign in
           </button>
