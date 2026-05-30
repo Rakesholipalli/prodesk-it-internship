@@ -1,0 +1,148 @@
+.home-page {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.home-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.home-title {
+  font-size: 56px;
+  font-weight: 800;
+  margin: 0 0 12px 0;
+  color: #fff;
+  letter-spacing: -1px;
+}
+
+.title-gradient {
+  background: linear-gradient(135deg, #e50914 0%, #ff6b6b 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.home-subtitle {
+  font-size: 18px;
+  color: #999;
+  margin: 0;
+  font-weight: 400;
+}
+
+.home-status {
+  margin: 32px 0 24px 0;
+}
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border-radius: 24px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.status-badge svg {
+  width: 16px;
+  height: 16px;
+}
+
+.popular-mode {
+  background: rgba(229, 9, 20, 0.1);
+  border: 1px solid rgba(229, 9, 20, 0.3);
+  color: #ff6b6b;
+}
+
+.search-mode {
+  background: rgba(59, 130, 246, 0.1);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  color: #60a5fa;
+}
+
+.home-error {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 20px;
+  background: rgba(220, 38, 38, 0.1);
+  border: 1px solid rgba(220, 38, 38, 0.3);
+  border-radius: 12px;
+  color: #fca5a5;
+  margin-bottom: 24px;
+}
+
+.home-error svg {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  color: #dc2626;
+}
+
+.infinite-scroll-trigger {
+  height: 100px;
+  margin: 20px 0;
+  visibility: visible;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.load-more-btn {
+  padding: 14px 32px;
+  background: linear-gradient(135deg, #e50914 0%, #ff6b6b 100%);
+  border: none;
+  border-radius: 10px;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.load-more-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(229, 9, 20, 0.4);
+}
+
+.end-of-results {
+  text-align: center;
+  padding: 40px 20px;
+  color: #666;
+}
+
+.end-of-results p {
+  font-size: 16px;
+  font-weight: 500;
+  margin: 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .home-page {
+    padding: 24px 16px;
+  }
+
+  .home-header {
+    margin-bottom: 32px;
+  }
+
+  .home-title {
+    font-size: 40px;
+  }
+
+  .home-subtitle {
+    font-size: 16px;
+  }
+
+  .home-status {
+    margin: 24px 0 20px 0;
+  }
+
+  .status-badge {
+    font-size: 13px;
+    padding: 8px 16px;
+  }
+}
