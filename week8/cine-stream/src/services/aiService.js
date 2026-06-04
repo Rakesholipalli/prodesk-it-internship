@@ -102,36 +102,3 @@ export const getMoodBasedMovieRecommendation = async (
   }
 };
 
-/*
-import OpenAI from 'openai';
-
-const openai = new OpenAI({
-  apiKey: import.meta.env.VITE_OPENAI_API_KEY,
-  dangerouslyAllowBrowser: true // Only for development
-});
-
-export const getMoodBasedMovieRecommendation = async (moodPrompt) => {
-  try {
-    const completion = await openai.chat.completions.create({
-      model: "gpt-3.5-turbo",
-      messages: [
-        {
-          role: "system",
-          content: "You are a movie recommendation assistant. When given a mood or context, respond with ONLY a single movie title. No explanations, no quotes, just the title."
-        },
-        {
-          role: "user",
-          content: `Suggest ONE movie based on this mood: ${moodPrompt}`
-        }
-      ],
-      temperature: 0.7,
-      max_tokens: 50
-    });
-
-    return completion.choices[0].message.content.trim();
-  } catch (error) {
-    console.error('Error getting AI movie recommendation:', error);
-    throw error;
-  }
-};
-*/
