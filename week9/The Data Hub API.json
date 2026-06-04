@@ -1,0 +1,95 @@
+{
+  "client": "Thunder Client",
+  "collectionName": "The Data Hub API",
+  "dateExported": "2026-06-03T10:00:00.000Z",
+  "version": "1.1",
+  "folders": [],
+  "requests": [
+    {
+      "name": "1. GET /posts - Show all posts",
+      "method": "GET",
+      "url": "http://localhost:5000/posts",
+      "headers": [],
+      "tests": [],
+      "sortNum": 10000
+    },
+    {
+      "name": "2. POST /posts - Create a new post",
+      "method": "POST",
+      "url": "http://localhost:5000/posts",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"title\": \"My First Blog\",\n  \"content\": \"Hello World\"\n}",
+        "form": []
+      },
+      "tests": [],
+      "sortNum": 20000
+    },
+    {
+      "name": "3. GET /posts - Show the newly added post",
+      "method": "GET",
+      "url": "http://localhost:5000/posts",
+      "headers": [],
+      "tests": [],
+      "sortNum": 30000
+    },
+    {
+      "name": "4. PUT /posts/1 - Update the post",
+      "method": "PUT",
+      "url": "http://localhost:5000/posts/1",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"title\": \"Updated Blog Title\",\n  \"content\": \"This content has been updated!\"\n}",
+        "form": []
+      },
+      "tests": [],
+      "sortNum": 40000
+    },
+    {
+      "name": "5. DELETE /posts/1 - Delete the post",
+      "method": "DELETE",
+      "url": "http://localhost:5000/posts/1",
+      "headers": [],
+      "tests": [],
+      "sortNum": 50000
+    },
+    {
+      "name": "6. GET /posts - Show the array is empty again",
+      "method": "GET",
+      "url": "http://localhost:5000/posts",
+      "headers": [],
+      "tests": [],
+      "sortNum": 60000
+    },
+    {
+      "name": "7. POST /login - Show the mock JWT token response",
+      "method": "POST",
+      "url": "http://localhost:5000/login",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"username\": \"admin\",\n  \"password\": \"secret123\"\n}",
+        "form": []
+      },
+      "tests": [],
+      "sortNum": 70000
+    }
+  ]
+}
