@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// Configuration constants
+
 const MAX_TITLE_LENGTH = 200;
 const MAX_CONTENT_LENGTH = 10000;
 const MAX_AUTHOR_LENGTH = 100;
@@ -20,13 +20,13 @@ const getCurrentTimestamp = () => {
   });
 };
 
-// Input sanitization helper
+
 const sanitizeInput = (input, maxLength) => {
   if (typeof input !== 'string') return '';
   return input.trim().slice(0, maxLength);
 };
 
-// Validation helper
+
 const validatePostData = (title, content, author) => {
   const errors = [];
   
@@ -93,11 +93,11 @@ const generateMockToken = (username) => {
   return `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.${Buffer.from(JSON.stringify(payload)).toString('base64')}.mockSignature${Date.now()}`;
 };
 
-// Middleware setup
+
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
-// CORS configuration
+
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
@@ -109,7 +109,7 @@ app.use((req, res, next) => {
   next();
 });
 
-// Request logger middleware
+
 const requestLogger = (req, res, next) => {
   const timestamp = getCurrentTimestamp();
   console.log(`[${req.method}] ${req.url} - ${timestamp}`);
@@ -118,7 +118,7 @@ const requestLogger = (req, res, next) => {
 
 app.use(requestLogger);
 
-// Global error handler middleware
+
 const errorHandler = (err, req, res, next) => {
   console.error('Error occurred:', err.message);
   
@@ -164,7 +164,7 @@ const getServerStatus = (req, res) => {
 
 app.get('/', getServerStatus);
 
-// Health check endpoint for monitoring
+
 const healthCheck = (req, res) => {
   const healthData = {
     status: 'healthy',
@@ -217,12 +217,12 @@ const createNewPost = (req, res) => {
   try {
     let { title, content, author } = req.body;
     
-    // Sanitize inputs
+  
     title = sanitizeInput(title, MAX_TITLE_LENGTH);
     content = sanitizeInput(content, MAX_CONTENT_LENGTH);
     author = author ? sanitizeInput(author, MAX_AUTHOR_LENGTH) : 'Anonymous';
     
-    // Validate inputs
+  
     const validationErrors = validatePostData(title, content, author);
     if (validationErrors.length > 0) {
       return res.status(400).json({
@@ -255,12 +255,12 @@ const updateExistingPost = (req, res) => {
   try {
     let { title, content, author } = req.body;
     
-    // Sanitize inputs if provided
+    
     if (title) title = sanitizeInput(title, MAX_TITLE_LENGTH);
     if (content) content = sanitizeInput(content, MAX_CONTENT_LENGTH);
     if (author) author = sanitizeInput(author, MAX_AUTHOR_LENGTH);
     
-    // Validate at least one field is provided
+    
     if (!title && !content && !author) {
       return res.status(400).json({
         success: false,
@@ -321,7 +321,7 @@ const handleLogin = (req, res) => {
   try {
     let { username, password } = req.body;
     
-    // Validate inputs
+    
     if (!username || !password) {
       return res.status(400).json({
         success: false,
@@ -329,7 +329,7 @@ const handleLogin = (req, res) => {
       });
     }
     
-    // Sanitize username
+    
     username = sanitizeInput(username, 50);
     
     if (username.length < 3) {
@@ -369,7 +369,7 @@ const handleLogin = (req, res) => {
 
 app.post('/login', handleLogin);
 
-// 404 handler for undefined routes
+
 app.use((req, res) => {
   res.status(404).json({
     success: false,
@@ -387,7 +387,7 @@ app.use((req, res) => {
   });
 });
 
-// Apply global error handler (must be last)
+
 app.use(errorHandler);
 
 const startServer = () => {
