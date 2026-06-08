@@ -11,11 +11,15 @@ A robust RESTful API server built with Node.js and Express.js, featuring full CR
 - **Custom Middleware Logger** — Automatic request logging with HTTP method, URL path, and timestamp
 - **Mock JWT Authentication** — Login endpoint generating mock JSON Web Tokens for auth simulation
 - **ES6+ Refactored Code** — Modern JavaScript with const/let, arrow functions, and modular helper functions
-- **Input Validation** — Server-side validation for required fields with clear error messages
+- **Input Validation & Sanitization** — Server-side validation with character limits and input sanitization for security
+- **CORS Support** — Cross-Origin Resource Sharing enabled for frontend integration
 - **RESTful Architecture** — Industry-standard REST principles with proper HTTP status codes
 - **Hot Reload Support** — Nodemon integration for automatic server restart during development
 - **Timestamp Tracking** — Automatic createdAt and updatedAt timestamps on all posts
-- **Error Handling** — Graceful 404 and 400 error responses with descriptive messages
+- **Comprehensive Error Handling** — Global error handler with graceful degradation for edge cases and API downtime scenarios
+- **Health Check Endpoint** — Monitor server status, uptime, and memory usage
+- **404 Route Handler** — User-friendly messages for undefined routes with available endpoint suggestions
+- **Environment Configuration** — Support for environment variables (PORT, NODE_ENV)
 
 ---
 
@@ -41,7 +45,10 @@ npm run dev
 Then test the endpoints at `http://localhost:5000`
 
 **Thunder Client Setup:**
-Import the collection file `thunder-collection_The Data Hub API.json` into Thunder Client extension in VS Code for quick API testing.
+Import the collection file `The Data Hub API.json` into Thunder Client extension in VS Code for quick API testing.
+
+**Health Check:**
+Visit `http://localhost:5000/health` to monitor server status and performance metrics.
 
 ---
 
