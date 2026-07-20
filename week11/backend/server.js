@@ -10,13 +10,12 @@ const app = express();
 
 connectDB();
 
-const corsOptions = {
-  origin: process.env.FRONTEND_URL || 'http://localhost:5173',
+// Temporarily allow all origins for debugging
+app.use(cors({
+  origin: true,
   credentials: true,
   optionsSuccessStatus: 200
-};
-
-app.use(cors(corsOptions));
+}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
