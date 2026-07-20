@@ -54,6 +54,6 @@ npm test
 
 ## Live Demo
 
-**Frontend:** https://your-frontend-url.vercel.app
+**Frontend:** https://prodesk-it-internship-p582.vercel.app/
 
-**Backend API:** https://your-backend-url.vercel.app
+**Backend API:** https://prodesk-it-internship-p582.vercel.app/
