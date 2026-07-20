@@ -10,21 +10,21 @@ const app = express();
 
 connectDB();
 
-// Allow localhost and all Vercel deployment URLs
+
 const corsOptions = {
   origin: function (origin, callback) {
-    // Allow requests with no origin (like mobile apps or curl)
+
     if (!origin) return callback(null, true);
     
-    // Allow localhost for development
+   
     if (origin.includes('localhost')) return callback(null, true);
     
-    // Allow all Vercel deployment URLs (production and previews)
+  
     if (origin.includes('prodesk-it-internship-p582') && origin.includes('.vercel.app')) {
       return callback(null, true);
     }
     
-    // Deny all others
+   
     callback(new Error('Not allowed by CORS'));
   },
   credentials: true,
