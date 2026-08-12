@@ -1,0 +1,137 @@
+// TaskMatrix - 5 collections
+// Import to dbdiagram.io for ERD
+
+Project TaskMatrix {
+  database_type: 'MongoDB'
+  Note: 'Agile PM Platform'
+}
+
+// Users
+Table users {
+  _id ObjectId [pk]
+  fullName varchar [not null]
+  email varchar [unique, not null]
+  password varchar [not null, note: 'bcrypt hashed']
+  avatar varchar
+  role varchar [not null, default: 'developer', note: 'admin, project_manager, developer, viewer']
+  bio text
+  status varchar [not null, default: 'offline', note: 'online, away, busy, offline']
+  preferences json
+  createdAt timestamp [not null, default: `now()`]
+  updatedAt timestamp [not null, default: `now()`]
+  lastLoginAt timestamp
+  
+  indexes {
+    email [unique, name: 'idx_users_email']
+    role [name: 'idx_users_role']
+    createdAt [name: 'idx_users_created']
+  }
+}
+
+// Projects
+Table projects {
+  _id ObjectId [pk]
+  name varchar [not null]
+  key varchar [unique, not null, note: 'e.g. TASK for TASK-101']
+  description text
+  icon varchar
+  color varchar
+  status varchar [not null, default: 'active', note: 'active, on_hold, completed, archived']
+  owner ObjectId [ref: > users._id, not null]
+  members json [note: 'member array with user ref + role']
+  settings json
+  createdAt timestamp [not null, default: `now()`]
+  updatedAt timestamp [not null, default: `now()`]
+  
+  indexes {
+    name [name: 'idx_projects_name']
+    owner [name: 'idx_projects_owner']
+    status [name: 'idx_projects_status']
+    key [unique, name: 'idx_projects_key']
+  }
+}
+
+// Tasks
+Table tasks {
+  _id ObjectId [pk]
+  taskId varchar [unique, not null, note: 'e.g. TASK-101']
+  title varchar [not null]
+  description text
+  status varchar [not null, default: 'todo', note: 'todo, in_progress, in_review, done']
+  priority varchar [not null, default: 'medium', note: 'low, medium, high, critical']
+  project ObjectId [ref: > projects._id, not null]
+  assignee ObjectId [ref: > users._id]
+  reporter ObjectId [ref: > users._id, not null]
+  sprint varchar [note: 'e.g. Sprint 1, Q1 2026']
+  labels json
+  dueDate timestamp
+  estimatedHours decimal
+  actualHours decimal
+  attachments json
+  subtasks json
+  dependencies json [note: 'blockedBy + blocks arrays']
+  position int [not null, note: 'ordering in column']
+  createdAt timestamp [not null, default: `now()`]
+  updatedAt timestamp [not null, default: `now()`]
+  completedAt timestamp
+  
+  indexes {
+    taskId [unique, name: 'idx_tasks_taskid']
+    (project, status) [name: 'idx_tasks_project_status']
+    assignee [name: 'idx_tasks_assignee']
+    dueDate [name: 'idx_tasks_duedate']
+    priority [name: 'idx_tasks_priority']
+  }
+}
+
+// Comments
+Table comments {
+  _id ObjectId [pk]
+  task ObjectId [ref: > tasks._id, not null]
+  author ObjectId [ref: > users._id, not null]
+  content text [not null]
+  mentions json [note: 'user IDs']
+  attachments json
+  editedAt timestamp
+  createdAt timestamp [not null, default: `now()`]
+  updatedAt timestamp [not null, default: `now()`]
+  
+  indexes {
+    task [name: 'idx_comments_task']
+    author [name: 'idx_comments_author']
+    createdAt [name: 'idx_comments_created']
+  }
+}
+
+
+
+// Activities
+Table activities {
+  _id ObjectId [pk]
+  type varchar [not null, note: 'task_created, task_updated, etc.']
+  user ObjectId [ref: > users._id, not null]
+  project ObjectId [ref: > projects._id, not null]
+  task ObjectId [ref: > tasks._id]
+  metadata json [note: 'field, oldValue, newValue']
+  createdAt timestamp [not null, default: `now()`]
+  
+  indexes {
+    (user, createdAt) [name: 'idx_activities_user_created']
+    project [name: 'idx_activities_project']
+    task [name: 'idx_activities_task']
+    createdAt [name: 'idx_activities_created_ttl', note: 'TTL 90 days']
+  }
+}
+
+
+
+// Relationships
+// users → projects (owner, members)
+// projects → tasks
+// users → tasks (assignee, reporter)
+// tasks → comments
+// users → comments (author)
+// users/projects/tasks → activities
+
+// Sprint = string field in tasks
+// Notifications = activities feed
